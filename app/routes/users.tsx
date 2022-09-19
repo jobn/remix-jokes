@@ -1,7 +1,6 @@
 import { User } from '@prisma/client';
 import { LinksFunction, LoaderFunction } from '@remix-run/node';
 import { Form, Link, Outlet, useLoaderData } from '@remix-run/react';
-import { db } from '~/utils/db.server';
 import { getUser } from '~/utils/session.server';
 import stylesUrl from '../styles/jokes.css';
 
@@ -16,25 +15,19 @@ export let links: LinksFunction = () => {
 
 type LoaderData = {
   user: User | null;
-  jokeListItems: Array<{ id: string; name: string }>;
 };
 
 export let loader: LoaderFunction = async ({ request }) => {
-  let jokeListItems = await db.joke.findMany({
-    take: 5,
-    orderBy: { createdAt: 'desc' },
-    select: { id: true, name: true },
-  });
   let user = await getUser(request);
 
   let data: LoaderData = {
-    jokeListItems,
     user,
   };
+
   return data;
 };
 
-export default function JokesRoute() {
+export default function UsersRoute() {
   let data = useLoaderData<LoaderData>();
 
   return (
@@ -63,22 +56,7 @@ export default function JokesRoute() {
       </header>
       <main className="jokes-main">
         <div className="container">
-          <div className="jokes-list">
-            <Link to=".">Get a random joke</Link>
-            <p>Here are a few more jokes to check out:</p>
-            <ul>
-              {data.jokeListItems.map((joke) => (
-                <li key={joke.id}>
-                  <Link prefetch="intent" to={joke.id}>
-                    {joke.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <Link to="new" className="button">
-              Add your own
-            </Link>
-          </div>
+          <div className="jokes-list">Maybe links here?</div>
           <div className="jokes-outlet">
             <Outlet />
           </div>

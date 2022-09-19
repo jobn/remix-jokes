@@ -1,5 +1,5 @@
-import type { LinksFunction, MetaFunction } from 'remix';
-import { Link } from 'remix';
+import type { LinksFunction, MetaFunction } from '@remix-run/node';
+import { Link } from '@remix-run/react';
 import stylesUrl from '../styles/index.css';
 
 export let links: LinksFunction = () => {
@@ -22,6 +22,9 @@ export default function Index() {
           <ul>
             <li>
               <Link to="jokes">Read Jokes</Link>
+            </li>
+            <li>
+              <Link to="users">Users</Link>
             </li>
           </ul>
         </nav>
