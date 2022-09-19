@@ -1,13 +1,17 @@
 import type { Joke } from '@prisma/client';
-import type { ActionFunction, LoaderFunction, MetaFunction } from 'remix';
+import type {
+  ActionFunction,
+  LoaderFunction,
+  MetaFunction,
+} from '@remix-run/node';
+import { redirect } from '@remix-run/node';
 import {
-  Link,
-  useLoaderData,
-  useCatch,
-  redirect,
-  useParams,
   Form,
-} from 'remix';
+  Link,
+  useCatch,
+  useLoaderData,
+  useParams,
+} from '@remix-run/react';
 import { JokeDisplay } from '~/components/joke';
 import { db } from '~/utils/db.server';
 import { getUserId, requireUserId } from '~/utils/session.server';
